@@ -229,7 +229,31 @@ $
 
 <br><br>
 
-### d. 일반 명령어
+### d. 기타 명령어
 
 명령어 | 뜻
 -------|---
+`reset` | 방금 한 `add` 를 취소
+`reset HEAD~1` | 최근 `commit` 1개를 취소. 이후 다시 `push`를 하면 `commit` 수가 줄어드는 것을 확인할 수 있음
+
+
+<br><br><br>
+
+# 2. pull-request
+
+- pull-request : 다른 프로젝트에 내가 만든 `commit`을 제출한다.
+    - 원리 : 다른 프로젝트 `fork` -> 내 계정에서 해당 프로젝트를 새로 만듬 -> 이를 토대로 `commit`한 내용을 pull-request 한다
+
+<br><br>
+
+### b. 기초 명령어
+
+명령어 | 뜻
+-------|---
+`checkout` | `branch` 를 전환. ex) `git checkout master`, `git checkout develop`  
+`clone` | 특정 url의 repo를 받아옴. ex) `git clone https://github.com/Go-oh/git-training.git`
+`branch` | `branch` 목록들을 보여줌과 동시에 현재 브랜치가 무엇인지 보여줌
+`merge` | 현재 브랜치(`git status`시 나오는 브랜치)를 기준으로 다른 브랜치와 합침. 이렇게 되면 `commit` 내역이 합쳐짐
+
+- `git push` 이후 github.com 에서 fork한 repo에 pull-request를 시도한다. 이 때, 본래 프로젝트 url에서 pull request 되었는지 확인한다.
+- `branch` : 한 윈도우에 여러 계정을 쓰는 느낌...? 브랜치 마다 파일이 보여지거나 숨겨진다. `commit` 개수도 다를 수 있다.
