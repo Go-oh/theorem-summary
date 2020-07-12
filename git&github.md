@@ -37,7 +37,7 @@ git config --global user.name "Go-oh"
 `commit -sm` | 커밋할 때 사인(-s, *signed*)과 메세지(-m, *message*) 추가
 `commit --amend` | 가장 최근의 커밋을 수정. (amend : 수정하다)
 `push` | 커밋된 것들을 github.com에 업로드. 에러날때가 있는데 주로 local에서 커밋 ID != Github에서의 커밋 ID여서다. 이때 강제로 푸쉬하면 이전에 푸쉬했던거 다 날라가니 주의
-`push origin master -f` | 강제로 푸쉬
+`push origin master -f` | 강제로 푸쉬. 참고로 `origin` 이란 리모트(git url)에 `master`란 브랜치로 `push` 한다는 의미
 `init` | 해당 폴더를 git 초기화
 `remote` | 현재 있는 리모트 저장소를 확인
 - *`커밋한다` 는 의미는 `수정한 코드로 최신화한다` 와 같음*
@@ -246,8 +246,6 @@ $
 
 <br><br>
 
-### b. 기초 명령어
-
 명령어 | 뜻
 -------|---
 `checkout` | `branch` 를 전환. ex) `git checkout master`, `git checkout develop`  
@@ -257,3 +255,9 @@ $
 
 - `git push` 이후 github.com 에서 fork한 repo에 pull-request를 시도한다. 이 때, 본래 프로젝트 url에서 pull request 되었는지 확인한다.
 - `branch` : 한 윈도우에 여러 계정을 쓰는 느낌...? 브랜치 마다 파일이 보여지거나 숨겨진다. `commit` 개수도 다를 수 있다.
+
+# 3. Rebase
+- rebase : 
+
+
+6:24 부터
