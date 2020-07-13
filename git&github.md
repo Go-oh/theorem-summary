@@ -257,7 +257,142 @@ $
 - `branch` : 한 윈도우에 여러 계정을 쓰는 느낌...? 브랜치 마다 파일이 보여지거나 숨겨진다. `commit` 개수도 다를 수 있다.
 
 # 3. Rebase
-- rebase : 
+- rebase : 말 그대로 base(기준)을 바꿈
+    - 용도 : 여러 개발자와 협업시 *history*를 간단히 하려할 때
+    - 젠가에서 바꿀 블럭을 빼고 전체를 바꾼뒤(*tree*) 바꿀 블럭을 나중에 쌓아올린다는 느낌
+    
+<br><br>
 
 
-6:24 부터
+### `merge`와 `rebase`의 차이점
+
+명령어 | 설명
+-------|---  
+`merge` | 변경 내용의 이력이 모두 그대로 남아 있기 때문에 이력이 복잡해짐.  
+`rebase` | 이력은 단순해지지만, 원래의 커밋 이력이 변경됨. 정확한 이력을 남겨야 할 필요가 있을 경우에는 사용하면 안됨.
+
+명령어 | 뜻
+-------|---
+`rebase -i --root` | -i : interactive, --root는 최초 commit 까지 수정할수 있도록 하기 위함
+`rebase --continue`| commit 을 수정후 원래대로 복귀
+`fetch` | 특정 `remote`의 `branch`를 가져옴 ex)`git fetch upstream dev`
+`blame` | 특정 파일에서 누가 어느라인을 수정했는지 확인 가능 ex)`git blame exam.c`
+
+```bash
+
+
+//협업상황을 가정. 임의 개발자의 repo를 remote로 두고 branch를 rebase하는 상황
+//$ git remote get-url upstream
+//https://github.com/Taeung/git-training.git
+$ git fetch upstream dev
+From https://github.com/Taeung/git-training
+ * branch            dev        -> FETCH_HEAD
+
+///////////////////////////$ git rebase upstream/dev
+
+//remote : upstream, brnach : dev
+$ git status
+HEAD detached at upstream/dev
+nothing to commit, working tree clean
+
+
+$ git remote; git branch
+origin
+upstream
+* (HEAD detached at upstream/dev)
+  branch
+  c
+  dev
+  develop
+  master
+  remove
+  test
+
+
+$ git shortlog
+Taeung Song (13):
+      Add README file
+      Add knapsack problem PDF
+      packing knapsack: Basic code solving this question
+      packing knapsack: Change basic code
+      packing knapsack: Rename packing_knapsack to pack_knapsack
+      packing knapsack: Input & Output
+      packing knapsack: Add test script
+      packing knapsack: Add test script generator
+      packing knapsack: Implement code to solve this question
+      test git-pull-request
+      New version git-training
+      Add v3 PDF
+
+
+$ git rebase -i --root
+Successfully rebased and updated detached HEAD.
+
+pick 73e7acf Add README file
+edit 864cf0f 수정수정수정                     //두 번째 커밋을 바꾸려 pick을 edit으로 수정
+pick f9b87bb packing knapsack: Basic code solving this question
+pick 91f2d24 packing knapsack: Change basic code
+pick 3102e80 packing knapsack: Rename packing_knapsack to pack_knapsack
+pick 1863ec4 packing knapsack: Input & Output
+pick 4c744f0 packing knapsack: Add test script
+pick b2218e5 packing knapsack: Add test script generator
+pick f3be23d packing knapsack: Implement code to solve this question
+pick 18de302 test git-pull-request
+pick 32b69ec New version git-training
+pick 2504a40 Add v3 PDF
+pick 1b19aee Rebase test
+
+
+//아랫줄에서 'REBASE-i 2/13' 를 통해 두 번째 커밋을 수정중임을 알수있다.
+//기존과 달리 shortlog시 커밋수가 13 -> 2개로 줄어듬
+mm@DESKTOP MINGW64 ~/Desktop/Go-oh/git-training (detached HEAD|REBASE-i 2/13)
+$ git shortlog             
+Taeung Song (2):
+      Add README file
+      수정수정수정
+
+
+//기존엔 커밋할게 없다 떴는데, 지금은 status시 총 커밋수중 몇번째 커밋인지 확인가능
+mm@DESKTOP MINGW64 ~/Desktop/Go-oh/git-training (detached HEAD|REBASE-i 2/13)
+$ git status                
+interactive rebase in progress; onto 6dd6acb
+Last commands done (2 commands done):
+   pick 73e7acf Add README file
+   edit 864cf0f 수정수정수정
+Next commands to do (11 remaining commands):
+   pick f9b87bb packing knapsack: Basic code solving this question
+   pick 91f2d24 packing knapsack: Change basic code
+  (use "git rebase --edit-todo" to view and edit)
+You are currently editing a commit during a rebase.
+  (use "git commit --amend" to amend the current commit)
+  (use "git rebase --continue" once you are satisfied with your changes)
+
+nothing to commit, working tree clean
+
+
+mm@DESKTOP MINGW64 ~/Desktop/Go-oh/git-training (detached HEAD|REBASE-i 2/13)
+$ git rebase --continue
+Successfully rebased and updated detached HEAD.
+
+
+//'git rebase --continue' 시 원래대로 복귀
+$ git status
+HEAD detached at upstream/dev
+nothing to commit, working tree clean
+
+
+$ git shortlog
+Taeung Song (13):
+      Add README file
+      수정수정수정              //이전과 달리 두 번째 커밋이 수정됨
+      packing knapsack: Basic code solving this question
+      packing knapsack: Change basic code
+      packing knapsack: Rename packing_knapsack to pack_knapsack
+      packing knapsack: Input & Output
+      packing knapsack: Add test script
+      packing knapsack: Add test script generator
+      packing knapsack: Implement code to solve this question
+      test git-pull-request
+      New version git-training
+      Add v3 PDF
+```
