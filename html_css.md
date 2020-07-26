@@ -76,7 +76,68 @@ border: 5px double #ff0;   //이중선
 
 ### Position
 - 화면표시모델
-    - block element  
-        ex)p, h1, div
+    - block element
+		- block 단위로 표시  
+        ex)p(paragraph), h1(heading 1), div
     - inline element  
+		- line(한 줄) 단위로 표시  
         ex)strong, span
+		
+- 위치  
+	- 상대위치 : 기존 위치를 기준으로 위치 설정
+	- 절대위치 : 문서 전체를 기준으로 위치 설정. 단, **부모 요소가 `position:relative;`면 부모 요소를 기준**으로 위치 설정
+	- 고정위치 : 브라우저상에서 (*스크롤 무관하게*) 항상 보이게 할 때. 즉, 항상 같은 위치로 설정
+	
+	참고 : <a href="https://jongpak.com/prob/post/52"> 절대위치와 상대위치 </a>  
+	
+위치 | 표기  
+--------|--------  
+상대위치 |position:relative;  
+절대위치 |position:absolute;
+고정위치 |position:fixed;
+
+
+- floating
+	- 박스를 좌 or 우로 배치
+	- float 후에는 반드시 clear로 플로팅을 해제해야함
+	
+```html
+<style>
+	.mybox {    
+	background:#999;
+    width:300px;
+    height:50px;
+    float:both;
+}
+.mybox2 {    
+	background:#999;
+    width:300px;
+    height:50px;
+    float:left;
+}
+.mybox3 {    
+	background:#aa0;
+    width:300px;
+    height:50px;
+    float:right;
+}
+
+//별도의 class를 두어 clear 한다.
+.clear {    
+    /* 플로팅을 clear 해주지 않으면 레이아웃이 제대로 표시되지 않는다 */    
+    clear:both;    
+}
+</style>
+
+<div class="mybox">
+    왼쪽 플로팅
+</div>
+<div class="mybox2">
+    오른쪽 플로팅
+</div>
+<div class="mybox3">
+    안녕하세요
+</div>
+<div class="clear"></div>
+```
+<a href="https://codepen.io/go-oh/pen/WNrWpNR"> 결과보기 </a>
