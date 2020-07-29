@@ -49,7 +49,7 @@
 
 ### Box model
 - 안쪽부터 *content, padding, border, margin* 순이다.
-
+- 추후 서술되지만, *position* 은 *margin* 에 적용된다. 즉, *content, padding, border, margin, position*
 ![figure1](https://media.vlpt.us/images/yotae07/post/3fa079c7-5888-489b-8446-6e16ef392f03/margin,%20border,%20padding,%20and%20content.png)
 
 - border: [굵기] [유형] [색상]
