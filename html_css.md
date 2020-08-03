@@ -142,3 +142,68 @@ border: 5px double #ff0;   //이중선
 <div class="clear"></div>
 ```
 <a href="https://codepen.io/go-oh/pen/WNrWpNR"> 결과보기 </a>
+
+<br><br><br>
+
+### Layout
+
+`width` | 가로
+`min-width` | 가로 최솟값
+`max-width` | 가로 최댓값
+`margin: 0 auto` | 중앙 정렬
+`background-color` | 배경 
+`<ul></ul>` | unordered list
+`<ol></ol>` | ordered list
+`<li></li>` | list. <ol> or <ul>에 의해 묶여진다.
+
+
+예제 : 4 강[웹 마크업 기초 활용] 레이아웃 만들기-2.html
+```
+ <body>
+        <div id="wrap">
+            <div id="header">
+            </div>
+            <div id="main">
+                <div id="mainContent">
+                    <div id="secondContent">
+                        <h4>layout based on float</h4>
+                        <p></p>
+                    </div>
+                    <div id="firstContent">
+                        <h1>휴가를 가는 방법</h1>
+                        <span class="logo">
+                            <img src="http://bitly.kr/1NQesokDfur" alt="이미지1" width="960px">
+                        </span>
+                        <p></p>
+                    </div>
+                </div>
+                <div id="subContent">
+                    <ul>
+                        <li><a href="#">홈</a></li>
+                        <li><a href="#">군대소개</a></li>
+                        <li><a href="#">뉴스</a></li>
+                        <li><a href="#">공지사항</a></li>
+                        <li><a href="#">고객센터</a></li>
+                    </ul>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div id="foot">
+                <span>2020.7.29 집에가기를 기원하며</span>
+            </div>
+        </div>
+    </body>
+```
+
+위 예제의 구조는 다음과 같다. (</div> 생략)
+
+```
+	<div id="wrap">
+		<div id="header">
+	  	<div id="main">
+			<div id="mainContent">
+		    		<div id="secondContent">
+			    	<div id="firstContent">
+			<div id="subContent">
+    		<div id="foot">
+```
